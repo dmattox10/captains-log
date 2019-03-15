@@ -1,2 +1,15 @@
-import FormContainer from "./js/components/container/FormContainer.jsx"
-import HeadContainer from "./js/components/container/HeadContainer.jsx"
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+{/*import '../css/index.css'*/}
+
+class App extends Component {
+    render() {
+        return (
+            <div className="App">
+                <h1>Include Components here!</h1>
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(<App />, document.getElementById('components'))
