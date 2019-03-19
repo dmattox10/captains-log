@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 class List extends Component {
+  
   render() {
     return (
         <form onSubmit={this.props.addEntry}>

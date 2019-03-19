@@ -1,3 +1,4 @@
+var path = require('path')
 var express = require('express')
 var port = process.env.PORT || 8888
 var mongoose = require('mongoose')
@@ -7,9 +8,12 @@ var bodyParser = require('body-parser')
 var session = require('express-session') //??
 var expressValidator = require('express-validator')
 
-var configDB = require('./config/database.js')
+
 
 var app = express()
+
+
+var configDB = require('../config/database')
 mongoose.connect(configDB.url, { useNewUrlParser: true })
 mongoose.connection.on('error', error => console.log(error) );
 mongoose.Promise = global.Promise;
@@ -19,7 +23,7 @@ mongoose.Promise = global.Promise;
 //require('./routes/index.js')(app/*, passport*/) // Do I need passport?
 //require('./routes/fourohfour.js')(app/*, passport*/) // Do I need passport?
 
-require('./config/passport');
+require('../config/passport');
 
 app.use(cookieParser) //??
 app.use(bodyParser.urlencoded({
@@ -28,9 +32,8 @@ app.use(bodyParser.urlencoded({
 
 app.use(expressValidator)
 app.use(require('express-promise')())
-
-app.use('/controllers', express.static(__dirname + 'controllers'))
-//app.use('/models', express.static(__dirname + 'models')) // I'm not sure I should be doing this one!
+app.use('/controllers', express.static(__dirname + 'controllers')) // I should really use controllers!
+app.use('/models', express.static(__dirname + 'models')) // I'm not sure I should be doing this one!
 
 app.use(session({ secret: 'IWillChangeThisInProdIPromiseThisTimeForRealIMeanIt'}))
 
