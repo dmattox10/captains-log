@@ -8,12 +8,11 @@ var bodyParser = require('body-parser')
 var session = require('express-session') //??
 var expressValidator = require('express-validator')
 
-
-
 var app = express()
 
-
 var configDB = require('../config/database')
+var params = require('../config/params')
+
 mongoose.connect(configDB.url, { useNewUrlParser: true })
 mongoose.connection.on('error', error => console.log(error) );
 mongoose.Promise = global.Promise;
@@ -35,7 +34,11 @@ app.use(require('express-promise')())
 app.use('/controllers', express.static(__dirname + 'controllers')) // I should really use controllers!
 app.use('/models', express.static(__dirname + 'models')) // I'm not sure I should be doing this one!
 
-app.use(session({ secret: 'IWillChangeThisInProdIPromiseThisTimeForRealIMeanIt'}))
+app.use(session({ 
+    secret: 'IWillChangeThisInProdIPromiseThisTimeForRealIMeanIt',
+    resave: true,
+    saveUninitialized: true
+}))
 
 app.use(passport.initialize())
 app.use(passport.session())
