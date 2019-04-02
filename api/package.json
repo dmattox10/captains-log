@@ -1,35 +1,32 @@
 {
-  "name": "api",
+  "name": "backend",
   "version": "1.0.0",
-  "main": "server.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
-    "build": "babel server.js -d dist",
-    "prod": "forever dist/server.js",
-    "start": "yarn build && nodemon dist/server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel app.js -d dist",
+    "prod": "forever dist/app.js",
+    "start": "nodemon app.js"
   },
-  "author": "Daniel Mattox",
-  "license": "MIT",
-  "private": false,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.4",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
-    "cookie-parser": "^1.4.4",
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "express-promise": "^0.4.0",
-    "express-session": "^1.15.6",
-    "express-validator": "^5.3.1",
-    "forever": "^0.15.3",
-    "jsonwebtoken": "^8.5.0",
-    "mongoose": "^5.4.19",
+    "express": "^4.16.3",
+    "forever": "^0.15.4",
+    "gravatar": "^1.6.0",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.4",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "validator": "^10.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.3",
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babelify": "^10.0.0",
-    "nodemon": "^1.18.10"
+    "babel-preset-env": "^1.7.0"
   }
 }
