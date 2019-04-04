@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
+import Moment from 'moment'
+
+let stardate = getStardate()
+//let staryear = Math.trunc(getStardate())
 
 class Navbar extends Component {
 
@@ -35,8 +39,8 @@ class Navbar extends Component {
         </ul>
       )
         return(
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">Redux Node Auth</Link>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                <Link className="navbar-brand" to="/">Captain's Log, Stardate { stardate }</Link>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {isAuthenticated ? authLinks : guestLinks}
                 </div>
@@ -52,5 +56,30 @@ Navbar.propTypes = {
 const mapStateToProps = (state) => ({
     auth: state.auth
 })
+
+function daysBetween( date1, date2 ) {
+    //Get 1 day in milliseconds
+    var one_day=1000*60*60*24;
+  
+    // Convert both dates to milliseconds
+    var date1_ms = Moment.utc(date1)
+    var date2_ms = Moment.utc(date2)
+  
+    // Calculate the difference in milliseconds
+    var difference_ms = date2_ms - date1_ms;
+      
+    // Convert back to days and return
+    return Math.round(difference_ms/one_day); 
+  }
+
+function getStardate() {
+    let epoch, today, stardate
+
+    epoch  = new Date(1970, 0, 1)
+    today = new Date()
+    stardate = Math.round(daysBetween(epoch, today)* 39.7766856) /100
+
+    return stardate
+}
 
 export default connect(mapStateToProps, { logoutUser })(withRouter(Navbar));
