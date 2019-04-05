@@ -7,7 +7,7 @@ const passport = require('passport');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 
-const User = require('../models/user'); // I changed this from "User"
+const User = require('../models/User'); // I changed this from "User"
 
 router.post('/register', function(req, res) {
 
