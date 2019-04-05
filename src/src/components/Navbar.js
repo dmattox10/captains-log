@@ -19,7 +19,7 @@ class Navbar extends Component {
     render() {
         const {isAuthenticated, user} = this.props.auth;
         const authLinks = (
-            <ul className="navbar-nav ml-auto">
+            <ul className="navbar-nav">
                 <a href="" className="nav-link" onClick={this.onLogout.bind(this)}>
                     <img src={user.avatar} alt={user.name} title={user.name}
                         className="rounded-circle"
@@ -29,7 +29,7 @@ class Navbar extends Component {
             </ul>
         )
       const guestLinks = (
-        <ul className="navbar-nav ml-auto">
+        <ul className="navbar-nav">
             <li className="nav-item">
                 <Link className="nav-link" to="/register">Sign Up</Link>
             </li>
@@ -39,9 +39,12 @@ class Navbar extends Component {
         </ul>
       )
         return(
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <Link className="navbar-brand" to="/">Captain's Log, Stardate { stardate }</Link>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <nav className="navbar navbar-expand navbar-dark bg-dark">
+                <Link className="navbar-brand" to="/">Captain's Log</Link>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupporedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
                     {isAuthenticated ? authLinks : guestLinks}
                 </div>
             </nav>
