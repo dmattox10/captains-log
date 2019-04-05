@@ -13,6 +13,7 @@ class Entry extends Component {
         super();
         this.state = {
             entry: '',
+            stardate: '',
             user: '',
             errors: {}
         }
@@ -30,6 +31,7 @@ class Entry extends Component {
         e.preventDefault();
         const entry = {
             entry: this.state.entry,
+            stardate: stardate,
             user: this.state.user
         }
         this.props.enter(entry);
