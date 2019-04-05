@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import Bootstrap from 'bootstrap'
-import Reactstrap from 'reactstrap'
-
 export default class Footer extends Component {
     render() {
         return (
