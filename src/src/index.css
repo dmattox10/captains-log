@@ -8,4 +8,5 @@ body {
 
 .footer {
   flex-shrink: 0;
+  padding-top: 60px;
 }

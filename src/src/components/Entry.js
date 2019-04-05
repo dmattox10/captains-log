@@ -14,8 +14,6 @@ class Entry extends Component {
         this.state = {
             entry: '',
             stardate: '',
-            user: '',
-            errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,18 +30,11 @@ class Entry extends Component {
         const entry = {
             entry: this.state.entry,
             stardate: stardate,
-            user: this.state.user
         }
         this.props.enter(entry);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
-        }
-    }
+    
 
     componentDidMount() {
         if(this.props.auth.isAuthenticated) {
@@ -56,7 +47,6 @@ class Entry extends Component {
   render() {
     const {isAuthenticated, user} = this.props.auth
     if (isAuthenticated) {
-    const { errors } = this.state;
     return (
         <div className="container">
             <hr />
@@ -68,7 +58,6 @@ class Entry extends Component {
                      name="entry"
                      onChange={ this.handleInputChange }
                      value={ this.state.entry }
-                    { ...errors.name && (<div className="invalid-feedback">{errors.name}</div>) }
                     />
                     <button type="submit" className="btn btn-primary" style={{ marginTop: '20px'}}> Add Entry as { user.name } </button>
                 </form>
