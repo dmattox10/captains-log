@@ -9,9 +9,9 @@ import { setCurrentUser, logoutUser } from './actions/authentication';
 import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
-import Home from './components/Home';
 import Footer from './components/Footer'
 import Entry from './components/Entry'
+import List from './components/List'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
@@ -35,7 +35,7 @@ class App extends Component {
             <div>
               <Navbar />
               <Entry />
-              <Route exact path="/" component={ Home } />
+              <Route exact path="/" component={ List } />
               <div className="container">
                 <Route exact path="/register" component={ Register } />
                 <Route exact path="/login" component={ Login } />

@@ -14,6 +14,7 @@ class Entry extends Component {
         this.state = {
             entry: '',
             stardate: '',
+            redirectToReferrer: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,9 +33,16 @@ class Entry extends Component {
             stardate: stardate,
         }
         this.props.enter(entry);
+        this.setState({
+            redirectToReferrer: true
+        })
     }
 
-    
+    componentWillReceiveProps() {
+        if(this.nextProps.redirectToReferrer) {
+            this.props.history.push('/')
+        }
+    }
 
     componentDidMount() {
         if(this.props.auth.isAuthenticated) {
@@ -46,6 +54,7 @@ class Entry extends Component {
 
   render() {
     const {isAuthenticated, user} = this.props.auth
+    const redirectToReferrer = this.state.redirectToReferrer;
     if (isAuthenticated) {
     return (
         <div className="container">
@@ -78,7 +87,8 @@ class Entry extends Component {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    user: state.auth.user
+    user: state.auth.user,
+    redirectToReferrer: state.redirectToReferrer
 })
 
 function daysBetween( date1, date2 ) {
