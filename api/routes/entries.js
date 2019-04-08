@@ -47,7 +47,6 @@ router.get('/list', (req, res, next) => {
             for ( let i = 0; i < results.entries_list.length; i++ ) {
               jsonEntries[i] = results.entries_list[i]._doc
             }
-            console.log(jsonEntries[0])
             res.json({
                 entries_list: jsonEntries
             })

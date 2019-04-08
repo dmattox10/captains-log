@@ -6,8 +6,10 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
-
+const async = require('async')
 const User = require('../models/User'); // I changed this from "User"
+
+const maxSignups = 2
 
 router.post('/register', function(req, res) {
 
@@ -110,4 +112,25 @@ router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) =
     });
 });
 
+router.get('/settings', (req, res, next) => {
+        
+    async.parallel({
+
+        users_list: (callback) => {
+          User.find()
+          .exec(callback)
+        }
+      }, (err, results) => {
+        if (err) { console.log(err) }
+        let numSignups = results.users_list.length
+        console.log(numSignups)
+        return res.json({
+            maxSignups: maxSignups,
+            numSignups, numSignups
+        }) 
+    })
+})
+
+
 module.exports = router;
+

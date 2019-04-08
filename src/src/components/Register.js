@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../actions/authentication';
 import classnames from 'classnames';
+import axios from 'axios'
 
 class Register extends Component {
 
@@ -14,7 +15,9 @@ class Register extends Component {
             email: '',
             password: '',
             password_confirm: '',
-            errors: {}
+            errors: {},
+            maxSignups: '',
+            numSignups: ''
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,6 +55,20 @@ class Register extends Component {
         if(this.props.auth.isAuthenticated) {
             this.props.history.push('/');
         }
+        axios.get('/api/users/settings')
+      .then(res => {
+          console.log(res)
+        this.setState({
+            maxSignups: res.data.maxSignups,
+            numSignups: res.data.numSignups
+        })
+        }
+      )
+      .catch(error => this.setState({ error }))
+      if(this.state.maxSignups === this.state.numSignups) {
+        this.props.history.push('/')
+      }
+
     }
 
     render() {
