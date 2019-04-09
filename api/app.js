@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./db');
 const expressValidator = require('express-validator')
+const noSniff = require('dont-sniff-mimetype')
 
 const users = require('./routes/user'); 
 const entries = require('./routes/entries')
@@ -24,6 +25,9 @@ app.use(expressValidator())
 
 app.use('/api/users', users);
 app.use('/api/entries', entries)
+
+// Sets "X-Content-Type-Options: nosniff".
+app.use(noSniff())
 
 app.get('/', function(req, res) {
     res.send('hello');

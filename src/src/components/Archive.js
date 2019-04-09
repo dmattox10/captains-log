@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
+import { MDBContainer, MDBCollapse, MDBCard, MDBCardBody, MDBCollapseHeader } from "mdbreact";
 import axios from 'axios'
 
 class Archive extends Component {
@@ -8,8 +9,14 @@ class Archive extends Component {
         super();
         this.state = {
             entries: [],
+            collapseID: "collapse3"
         }
     }
+
+    toggleCollapse = collapseID => () =>
+    this.setState(prevState => ({
+    collapseID: prevState.collapseID !== collapseID ? collapseID : ""
+    }))
 
     componentDidMount() {
         axios.get('/api/entries/list')
@@ -28,21 +35,29 @@ class Archive extends Component {
     }
 
   render() {
-    const { entries } = this.state;
+    const { entries, collapseID } = this.state;
     return (
-        <div className="container">
-            <hr />
-            <div className="entries-list">
-                <ul>
-                    {entries.map(entry =>
-                        <li key={entry.date}>Captains' Log, Stardate {entry.stardate} :<br />{entry.entry}</li>
-                    )}
-                </ul>
-            </div>
-            <hr />
-        </div>
+        <MDBContainer>
+        <MDBContainer className="md-accordion mt-5">
+        {entries.map(entry =>
+          <MDBCard className="mt-3" onClick={this.toggleCollapse("collapse1")}>
+              <span>Captains' Log, Stardate {entry.stardate} :&nbsp;
+              <i className={ collapseID==="collapse1" ? "fa fa-angle-down rotate-icon" : "fa fa-angle-down" } /></span>
+            <MDBCollapse id="collapse1" isOpen={collapseID}>
+              <MDBCardBody>
+              {entry.entry}
+              </MDBCardBody>
+            </MDBCollapse>
+          </MDBCard>
+        )}
+          
+
+          
+        </MDBContainer>
+      </MDBContainer>
     )
   }
 }
 
 export default withRouter(Archive)
+
