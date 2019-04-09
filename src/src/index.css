@@ -4,9 +4,12 @@ body {
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
+  background-color: #2C75FF;
 }
 
 .footer {
   flex-shrink: 0;
   padding-top: 60px;
 }
+
+p { color: #2C75FF  !important; }

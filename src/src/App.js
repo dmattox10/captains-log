@@ -15,6 +15,7 @@ import List from './components/List'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
+
 if(localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
