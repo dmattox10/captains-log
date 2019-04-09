@@ -10,54 +10,64 @@ const async = require('async')
 const User = require('../models/User'); // I changed this from "User"
 
 const maxSignups = 2
-
 router.post('/register', function(req, res) {
 
     const { errors, isValid } = validateRegisterInput(req.body);
-
-    if(!isValid) {
-        return res.status(400).json(errors);
-    }
-    User.findOne({
-        email: req.body.email
-    }).then(user => {
-        if(user) {
-            return res.status(400).json({
-                email: 'Email already exists'
-            });
+    let numSignups = User.estimatedDocumentCount()
+    numSignups.then( result => {
+        if (result >= maxSignups) {
+            console.log('Maximum number of registrations for this instance reached')
+            errors.main = 'Maximum number of registrations for this instance reached'
+            return res.status(400).json(errors);
         }
+    
         else {
-            const avatar = gravatar.url(req.body.email, {
-                s: '200',
-                r: 'pg',
-                d: 'mm'
-            });
-            const newUser = new User({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                avatar
-            });
-            
-            bcrypt.genSalt(10, (err, salt) => {
-                if(err) console.error('There was an error', err);
-                else {
-                    bcrypt.hash(newUser.password, salt, (err, hash) => {
-                        if(err) console.error('There was an error', err);
-                        else {
-                            newUser.password = hash;
-                            newUser
-                                .save()
-                                .then(user => {
-                                    res.json(user)
-                                }); 
-                        }
+            if(!isValid) {
+                return res.status(400).json(errors);
+            }
+            User.findOne({
+                email: req.body.email
+            }).then(user => {
+                if(user) {
+                    return res.status(400).json({
+                        email: 'Email already exists'
                     });
                 }
-            });
+                else {
+                    const avatar = gravatar.url(req.body.email, {
+                        s: '200',
+                        r: 'pg',
+                        d: 'mm'
+                    });
+                    const newUser = new User({
+                        name: req.body.name,
+                        email: req.body.email,
+                        password: req.body.password,
+                        avatar
+                    });
+                    
+                    bcrypt.genSalt(10, (err, salt) => {
+                        if(err) console.error('There was an error', err);
+                        else {
+                            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                                if(err) console.error('There was an error', err);
+                                else {
+                                    newUser.password = hash;
+                                    newUser
+                                        .save()
+                                        .then(user => {
+                                            res.json(user)
+                                        }); 
+                                }
+                            })
+                        }
+                    })
+                }
+            })
         }
-    });
-});
+    })
+    
+})
 
 router.post('/login', (req, res) => {
 
@@ -113,22 +123,14 @@ router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) =
 });
 
 router.get('/settings', (req, res, next) => {
-        
-    async.parallel({
-
-        users_list: (callback) => {
-          User.find()
-          .exec(callback)
-        }
-      }, (err, results) => {
-        if (err) { console.log(err) }
-        let numSignups = results.users_list.length
-        console.log(numSignups)
-        return res.json({
-            maxSignups: maxSignups,
-            numSignups, numSignups
-        }) 
-    })
+    User
+        .estimatedDocumentCount()
+        .then(count => {
+            return res.json({
+                maxSignups: maxSignups,
+                numSignups: count
+            })
+        })
 })
 
 

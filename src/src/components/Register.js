@@ -59,7 +59,8 @@ class Register extends Component {
         const { errors } = this.state;
         return(
         <div className="container" style={{ marginTop: '50px'}}>
-            <h2 style={{marginBottom: '40px'}}>Registration</h2>
+            <h2 style={{marginBottom: '60px'}}>Registration</h2>
+            <span>{errors.main && (<div className="invalid-feedback">{errors.main}</div>)}</span>
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input

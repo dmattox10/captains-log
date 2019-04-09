@@ -8,7 +8,6 @@ class List extends Component {
         super();
         this.state = {
             entries: [],
-            error: null
         }
     }
 
@@ -26,11 +25,10 @@ class List extends Component {
               entries
           })
       })
-      .catch(error => this.setState({ error }))
     }
 
   render() {
-    const { error, entries } = this.state;
+    const { entries } = this.state;
     return (
         <div className="container">
             <hr />
