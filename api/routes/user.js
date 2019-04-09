@@ -20,7 +20,6 @@ router.post('/register', function(req, res) {
             errors.main = 'Maximum number of registrations for this instance reached'
             return res.status(400).json(errors);
         }
-    
         else {
             if(!isValid) {
                 return res.status(400).json(errors);

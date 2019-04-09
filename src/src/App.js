@@ -12,6 +12,8 @@ import Login from './components/Login';
 import Footer from './components/Footer'
 import Entry from './components/Entry'
 import List from './components/List'
+import Archive from './components/Archive'
+import Post from './components/Post'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
@@ -35,11 +37,13 @@ class App extends Component {
         <Router>
             <div>
               <Navbar />
-              <Entry />
               <Route exact path="/" component={ List } />
               <div className="container">
                 <Route exact path="/register" component={ Register } />
                 <Route exact path="/login" component={ Login } />
+                <Route exact path="/archive" component={ Archive } />
+                <Route exact path="/entry" component={ Entry } />
+                <Route exact path="/post" component={ Post } />
               </div>
               <Footer />
             </div>

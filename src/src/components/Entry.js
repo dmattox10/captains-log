@@ -67,7 +67,7 @@ class Entry extends Component {
     else {
         return (
             <div>
-
+                <h2>Please Log in to make an entry.</h2>
             </div>
         )
     }

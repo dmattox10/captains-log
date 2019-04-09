@@ -41,6 +41,9 @@ class Navbar extends Component {
         const {maxSignups, numSignups} = this.state
         const authLinks = (
             <ul className="navbar-nav">
+                <li className="nav-item">
+                        <Link className="nav-link" to="/archive">Archive</Link>
+                </li>
                 <a href="" className="nav-link" onClick={this.onLogout.bind(this)}>
                     <img src={user.avatar} alt="Log Out" title={user.name}
                         className="rounded-circle"
@@ -72,7 +75,7 @@ class Navbar extends Component {
         }
         return(
             <nav className="navbar navbar-expand navbar-dark bg-dark">
-                <Link className="navbar-brand" to="/">Captain's Log</Link>
+                <Link className="navbar-brand" to="/entry">Captain's Log</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupporedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
