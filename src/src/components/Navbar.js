@@ -21,7 +21,6 @@ class Navbar extends Component {
     componentDidMount() {
         axios.get('/api/users/settings')
       .then(res => {
-          console.log(res)
         this.setState({
             maxSignups: res.data.maxSignups,
             numSignups: res.data.numSignups
@@ -41,15 +40,16 @@ class Navbar extends Component {
         const {maxSignups, numSignups} = this.state
         const authLinks = (
             <ul className="navbar-nav">
-                <li className="nav-item">
+                
                         <Link className="nav-link" to="/archive">Archive</Link>
-                </li>
+                {/*}
                 <a href="" className="nav-link" onClick={this.onLogout.bind(this)}>
                     <img src={user.avatar} alt="Log Out" title={user.name}
                         className="rounded-circle"
                         style={{ width: '25px', marginRight: '5px'}} />
                             Logout
                 </a>
+        */}
             </ul>
         )
         if (maxSignups === numSignups) {
@@ -74,12 +74,9 @@ class Navbar extends Component {
             )
         }
         return(
-            <nav className="navbar navbar-expand navbar-dark bg-dark">
+            <nav className="navbar navbar-fixed-top navbar-dark bg-dark sticky-nav">
                 <Link className="navbar-brand" to="/entry">Captain's Log</Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupporedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+                <div className="d-flex justify-content-end" id="navbarSupportedContent">
                     {isAuthenticated ? authLinks : guestLinks}
                 </div>
             </nav>

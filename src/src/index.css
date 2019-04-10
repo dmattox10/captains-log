@@ -1,14 +1,138 @@
+* {
+  box-sizing: border-box;
+}
+
+*:before, *:after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  padding: 0;
+  padding-bottom: 80px;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
+  background: #bdc3c7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #bdc3c7, #2c3e50); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #bdc3c7, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  line-height: 0.8;
+}
+
+.main {
+  padding-top: 1em;
+  margin-bottom: 54px;
+}
+
+.main .title {
+  color: #fff;
+  background: #2C75FF;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.2em;
+  padding: 1em;
+}
+
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .footer {
   flex-shrink: 0;
   padding-top: 60px;
+  line-height: 1;
 }
 
 p { color: #2C75FF  !important; }
+
+.section {
+  position: relative;
+  width: 100%;
+  border-bottom: 2px solid #2C75FF;
+  border-top: 2px solid #2C75FF;
+  border-left: 4px solid #2C75FF;
+  border-right: 4px solid #2C75FF;
+  border-radius: 12px;
+}
+.section button {
+  position: absolute;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  height: 3em;
+  width: 3em;
+  outline: 0;
+  border: 0;
+  background: none;
+  text-indent: -9999%;
+  pointer-events: none;
+}
+
+.section button:before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 12px;
+  width: 4px;
+  border-radius: .3em;
+  background: #2C75FF;
+  transform-origin: 50%;
+  top: 50%;
+  left: 50%;
+  transition: all .25s ease-in-out;
+  transform: translate(75%, -50%) rotate(45deg);
+}
+.section button:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 12px;
+  width: 4px;
+  border-radius: .3em;
+  background: #2C75FF;
+  transform-origin: 50%;
+  top: 50%;
+  left: 50%;
+  transition: all .25s ease-in-out;
+  transform: translate(-75%, -50%) rotate(-45deg);
+}
+
+.section.open button:before, .section.open button:after {
+  height: 14px;
+}
+.section.open button:before {
+  transform: translate(0%, -50%) rotate(-45deg);
+}
+.section.open button:after {
+  transform: translate(0%, -50%) rotate(45deg);
+}
+
+.section.open .articlewrap {
+  height: 120px;
+}
+
+.articlewrap {
+  height: 0;
+  overflow: hidden;
+  transition: all .2s ease-in;
+}
+
+.sectionhead {
+  width: 100%;
+  overflow: hidden;
+  
+  cursor: pointer;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 1em;
+  padding-right: 2.1em;
+}
+
+.article {
+  padding: 1em;
+  color: #333;
+  line-height: 1.3;
+}

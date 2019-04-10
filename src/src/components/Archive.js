@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
-import { MDBContainer, MDBCollapse, MDBCard, MDBCardBody, MDBCollapseHeader } from "mdbreact";
 import axios from 'axios'
+import Section from './Section'
 
 class Archive extends Component {
     
@@ -9,14 +9,8 @@ class Archive extends Component {
         super();
         this.state = {
             entries: [],
-            collapseID: "collapse3"
         }
     }
-
-    toggleCollapse = collapseID => () =>
-    this.setState(prevState => ({
-    collapseID: prevState.collapseID !== collapseID ? collapseID : ""
-    }))
 
     componentDidMount() {
         axios.get('/api/entries/list')
@@ -34,27 +28,14 @@ class Archive extends Component {
       })
     }
 
-  render() {
-    const { entries, collapseID } = this.state;
+    render() {
+    const { entries } = this.state;
     return (
-        <MDBContainer>
-        <MDBContainer className="md-accordion mt-5">
-        {entries.map(entry =>
-          <MDBCard className="mt-3" onClick={this.toggleCollapse("collapse1")}>
-              <span>Captains' Log, Stardate {entry.stardate} :&nbsp;
-              <i className={ collapseID==="collapse1" ? "fa fa-angle-down rotate-icon" : "fa fa-angle-down" } /></span>
-            <MDBCollapse id="collapse1" isOpen={collapseID}>
-              <MDBCardBody>
-              {entry.entry}
-              </MDBCardBody>
-            </MDBCollapse>
-          </MDBCard>
-        )}
-          
-
-          
-        </MDBContainer>
-      </MDBContainer>
+        <div className="container-fluid">
+            <div className="main">
+                {entries.map((entry, id) =><div> <Section key={id} entry={entry.entry} title={`Captain's Log, Stardate ${entry.stardate}:`}></Section> <br/ > </div>)}
+            </div>
+        </div>
     )
   }
 }
