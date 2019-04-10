@@ -27,12 +27,12 @@ class Section extends Component {
       }
 
     render() {
-    const { entry, title, key } = this.props
+    const { entry, title, key , header} = this.props
     const { classNameGiven } = this.state
     return (
         <div className={ classNameGiven } key={key}>
         <button>toggle</button>
-        <div className="sectionhead" onClick={ this.handleClick.bind(this) }>{ title }</div>
+        <div className="sectionhead" onClick={ this.handleClick.bind(this) }>{ header }<br />{ title }</div>
         <div className="articlewrap">
           <div className="article">
             <p>{ entry }</p>

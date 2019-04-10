@@ -13,9 +13,9 @@ body {
   display: flex;
   flex-direction: column;
   background: #bdc3c7; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #bdc3c7, #2c3e50); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #bdc3c7, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  line-height: 0.8;
+  background: -webkit-linear-gradient(to right, #2c3e50, #292b2c); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2c3e50, #292b2c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  line-height: 0.9;
 }
 
 .main {
@@ -51,8 +51,8 @@ p { color: #2C75FF  !important; }
   width: 100%;
   border-bottom: 2px solid #2C75FF;
   border-top: 2px solid #2C75FF;
-  border-left: 4px solid #2C75FF;
-  border-right: 4px solid #2C75FF;
+  border-left: 8px solid #2C75FF;
+  border-right: 8px solid #2C75FF;
   border-radius: 12px;
 }
 .section button {

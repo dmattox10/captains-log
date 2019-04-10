@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const EntrySchema = new Schema({
     _id: Schema.Types.ObjectId,
+    title: {
+        type: String,
+        required: true
+    },
     entry: {
         type: String,
         required: true

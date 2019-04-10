@@ -12,6 +12,7 @@ class Entry extends Component {
     constructor() {
         super();
         this.state = {
+            title: '',
             entry: '',
             stardate: '',
         }
@@ -28,6 +29,7 @@ class Entry extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const entry = {
+            title: this.state.title,
             entry: this.state.entry,
             stardate: stardate,
         }
@@ -50,6 +52,13 @@ class Entry extends Component {
             <hr />
             <div className="form-group">
                 <form onSubmit={ this.handleSubmit }>
+                <input
+                    placeholder="Catchy Title"
+                    className="form-control"  
+                    name="title"
+                    onChange={ this.handleInputChange }
+                    value={ this.state.title }
+                    /><br />
                     <textarea className="form-control"
                      id="entry" 
                      placeholder={ placeholder }

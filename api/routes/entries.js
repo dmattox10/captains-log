@@ -8,7 +8,7 @@ const async = require('async')
 
 
 router.post('/enter', passport.authenticate('jwt', { session: false }), [
-    body('entry').isLength({ min: 3 }).trim().escape(),
+    body('entry').isLength({ min: 3 }).trim(),
     body('stardate').isNumeric().trim().escape()
   ],
   (req, res, next)  => {
@@ -18,6 +18,7 @@ router.post('/enter', passport.authenticate('jwt', { session: false }), [
     let entry = new Entry(
         {
             _id: id,
+            title: req.body.title,
             entry: req.body.entry,
             stardate: req.body.stardate
         }
@@ -34,7 +35,7 @@ router.get('/list', (req, res, next) => {
 
         entries_list: (callback) => {
           Entry.find()
-          .sort('date')
+          .sort('-date')
           .exec(callback)
         }
       }, (err, results) => {

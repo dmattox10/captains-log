@@ -16,6 +16,7 @@ class Archive extends Component {
         axios.get('/api/entries/list')
       .then(res => 
         res.data.entries_list.map(entry => ({
+            title: `${entry.title}`,
             entry: `${entry.entry}`,
             stardate: `${entry.stardate}`,
             date: `${entry.date}`
@@ -33,7 +34,7 @@ class Archive extends Component {
     return (
         <div className="container-fluid">
             <div className="main">
-                {entries.map((entry, id) =><div> <Section key={id} entry={entry.entry} title={`Captain's Log, Stardate ${entry.stardate}:`}></Section> <br/ > </div>)}
+                {entries.map((entry, id) =><div> <Section key={id} entry={entry.entry} title={entry.title} header={`Captain's Log, Stardate ${entry.stardate}`}></Section> <br/ > </div>)}
             </div>
         </div>
     )
