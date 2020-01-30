@@ -31,26 +31,26 @@ if(localStorage.jwtToken) {
 }
 
 class App extends Component {
-  render() {
-    return (
-      <Provider store = { store }>
-        <Router>
-            <div>
-              <Navbar />
-              <Route exact path="/" component={ Archive } />
-              <div className="container">
-                <Route exact path="/register" component={ Register } />
-                <Route exact path="/login" component={ Login } />
-                <Route exact path="/archive" component={ Archive } />
-                <Route exact path="/entry" component={ Entry } />
-                <Route exact path="/post" component={ Post } />
-              </div>
-              <Footer />
-            </div>
-          </Router>
-        </Provider>
-    );
-  }
+    render() {
+        return (
+            <Provider store = { store }>
+                <Router>
+                    <div>
+                        <Navbar />
+                        <Route exact path="/" component={ Archive } />
+                        <div className="container">
+                            <Route exact path="/register" component={ Register } />
+                            <Route exact path="/login" component={ Login } />
+                            <Route exact path="/archive" component={ Archive } />
+                            <Route exact path="/entry" component={ Entry } />
+                            <Route exact path="/post" component={ Post } />
+                        </div>
+                        <Footer />
+                    </div>
+                </Router>
+            </Provider>
+        )
+    }
 }
 
 export default App;
