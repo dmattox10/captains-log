@@ -1,0 +1,39 @@
+---
+version: '3.7'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: captains-server
+    container_name: captains-server
+    hostname: captains-server
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "5555:5555"
+    env_file: ./server/.env
+    environment:
+      - ENVIRONMENT=staging
+    restart: unless-stopped
+    command: "yarn start"
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        - PORT=${PORT}
+    image: captains-client
+    container_name: captains-client
+    hostname: captains-client
+    ports:
+     - "3333:3333"
+    command: "yarn start"
+
+volumes:
+  data-volume:
+  node_modules:
+  web-root:
+    driver: local
